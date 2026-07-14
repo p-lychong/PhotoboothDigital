@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="km">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f8f9fa">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <!-- <div class="logo">📸</div> -->
+      <div>
+        <div class="title">Photobooth</div>
+        <!-- <div class="subtitle">HTML / CSS / JS (Single + Photo Strip + Filters)</div> -->
+      </div>
+    </div>
+    <button id="btnFullscreen" class="btn btn-ghost">Full Screen</button>
+  </header>
+
+  <main class="container">
+    <!-- Left: Camera -->
+    <section class="panel">
+      <h2>កាមេរ៉ា</h2>
+
+      <div class="videoContainer">
+        <div class="videoWrap">
+          <video id="video" playsinline autoplay muted></video>
+          <div id="countdown" class="countdown hidden">3</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnStart" class="btn btn-primary">Start Camera</button>
+        <button id="btnStop" class="btn btn-secondary">Stop</button>
+        <button id="btnSwitchCamera" class="btn">Switch Camera</button>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          Mode
+          <select id="mode">
+            <option value="None">None</option>
+            <option value="single">Single Shot (1)</option>
+            <option value="strip2">Photo Strip (2)</option>
+            <option value="strip3">Photo Strip (3)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          Output Size
+          <select id="outSize">
+            <option value="none">None</option>
+            <option value="1080x1080">1080 x 1080</option>
+            <option value="1080x1350">1080 x 1350</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field">
+          Countdown
+          <select id="cdSec">
+            <option value="None">None</option>
+            <option value="3">3s</option>
+            <option value="5">5s</option>
+            <option value="10">10s</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="btnCapture" class="btn btn-primary">Capture</button>
+        <button id="btnReset" class="btn btn-ghost">Reset Shots</button>
+      </div>
+    </section>
+
+    <!-- Right: Frames + Preview -->
+    <section class="panel">
+      <h2>Frame </h2>
+
+      <div class="frameList" id="frameList" style="width: 275px;"></div>
+
+      <hr style="color: rgb(0, 0, 0); size: 5px;">
+      <h2>Preview </h2>
+
+      <div class="row">
+        <label class="field">
+          Filter
+          <select id="filter">
+            <!-- <option value="none">None (ធម្មតា)</option> -->
+            <!-- <option value="bw">B&W (ស ខ្មៅ)</option> -->
+            <!-- <option value="sepia">Sepia (Vintage)</option> -->
+            <option value="none">None</option>
+            <option value="bw">Black & White</option>
+            <option value="sepia">Sepia</option>
+            <option value="warm">Warm</option>
+            <option value="cool">Cool</option>
+            <option value="vintage">Vintage</option>
+            <option value="smoothface">Smooth Face</option>
+
+            <option value="halftoneGreen">Halftone Green</option>
+            <option value="halftonePink">Halftone Pink</option>
+            <option value="halftoneBlue">Halftone Blue</option>
+          </select>
+        </label>
+        <label class="field">
+          Strength
+          <input id="strength" type="range" min="0" max="100" value="70" />
+        </label>
+      </div><br>
+
+      <!-- <div class="row">
+        <label class="field">
+          Scale
+          <input id="scale" type="range" min="0.5" max="2" step="0.1" value="1" />
+        </label>
+      </div> -->
+
+      <div class="canvasWrap">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div class="row">
+        <button id="btnShare" class="btn btn-ghost">Share</button>
+        <button id="btnDownloadPng" class="btn btn-primary">Download PNG</button>
+        <button id="btnDownloadJpg" class="btn btn-secondary">Download JPG</button>
+      </div>
+
+      <!-- <div class="note">
+        <strong>Frame PNG</strong> ត្រូវមាន background transparent (ស៊ុម) ដាក់ក្នុង <code>assets/frames/</code>។
+        <br/>*Frame ក្នុង project នេះជាគំរូ (placeholder) អ្នកអាចជំនួសដោយ frame របស់អ្នក។
+      </div> -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    Simple Photobooth • Offline-friendly • No backend required • By Chong (2024)
+  </footer>
+
+  <script src="assets/js/frames.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+  }
+</script>
+</body>
+</html>
